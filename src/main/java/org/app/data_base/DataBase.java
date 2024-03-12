@@ -50,7 +50,7 @@ public class DataBase {
         }
         return data.toString();
     }
-    private boolean isUserExist(String login) {
+    public boolean isUserExist(String login) {
         try(EntityManagerFactory factory = Persistence.createEntityManagerFactory("DataBaseUnit")){
             EntityManager manager = factory.createEntityManager();
             try {

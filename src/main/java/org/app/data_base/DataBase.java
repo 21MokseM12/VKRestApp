@@ -1,21 +1,13 @@
 package org.app.data_base;
 import jakarta.persistence.*;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@Scope("singleton")
 public class DataBase {
-    private static DataBase dataBase;
-    public static synchronized DataBase getDataBase() {
-        if (dataBase == null) {
-            dataBase = new DataBase();
-        }
-
-        return dataBase;
-    }
-
-    private DataBase() {}
     public void addUser(String login, String password, String token) {
         if (!isUserExist(login)) {
             try (EntityManagerFactory factory = Persistence.createEntityManagerFactory("DataBaseUnit")) {

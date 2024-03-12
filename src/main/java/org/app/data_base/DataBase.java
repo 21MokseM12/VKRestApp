@@ -2,6 +2,8 @@ package org.app.data_base;
 import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class DataBase {
     private static DataBase dataBase;
@@ -59,6 +61,12 @@ public class DataBase {
             } catch (NoResultException e) {
                 return false;
             }
+        }
+    }
+    public List<Clients> getAllUserData() {
+        try (EntityManagerFactory factory = Persistence.createEntityManagerFactory("DataBaseUnit")) {
+            EntityManager manager = factory.createEntityManager();
+            return manager.createNamedQuery("Clients.findAllClients", Clients.class).getResultList();
         }
     }
 }

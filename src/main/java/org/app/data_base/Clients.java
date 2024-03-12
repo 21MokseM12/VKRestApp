@@ -16,6 +16,10 @@ import java.util.Objects;
         name = "Clients.findMaxId",
         query = "select max(c.id) from Clients c"
 )
+@NamedQuery(
+        name = "Clients.findAllClients",
+        query = "select c from Clients c"
+)
 @Entity
 public class Clients {
     @GeneratedValue(strategy = GenerationType.IDENTITY)

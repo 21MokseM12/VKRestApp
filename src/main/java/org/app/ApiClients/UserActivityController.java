@@ -25,7 +25,7 @@ public class UserActivityController {
 
     @GetMapping("")
     public List<Clients> getUsers() {
-        return DataBase.getDataBase().getAllUserData();
+        return dataBase.getAllUserData();
     }
 
     @GetMapping("/{login}")

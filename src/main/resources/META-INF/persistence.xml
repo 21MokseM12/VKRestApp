@@ -4,10 +4,10 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>org.app.data_base.Clients</class>
         <properties>
-            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/restApiDataBase"/>
-            <property name="hibernate.connection.username" value="postgres"/>
+            <property name="hibernate.connection.url" value="${spring.datasource.url}"/>
+            <property name="hibernate.connection.username" value="${spring.datasource.username}"/>
+            <property name="hibernate.connection.password" value="${spring.datasource.password}"/>
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
-            <property name="hibernate.connection.password" value="admin"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
         </properties>
     </persistence-unit>

@@ -18,5 +18,6 @@ public class AppTest
     public void shouldAnswerWithTrue() {
         DataBase dataBase = DataBase.getDataBase();
         dataBase.addUser("dda", "dada", "dada");
+        dataBase.deleteUser("dda");
     }
 }

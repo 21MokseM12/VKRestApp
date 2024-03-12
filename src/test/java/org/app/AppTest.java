@@ -4,7 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.app.data_base.DataBase;
 import org.junit.Test;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Unit test for simple App.
@@ -17,7 +16,7 @@ public class AppTest
     @Test
     public void shouldAnswerWithTrue() {
         DataBase dataBase = DataBase.getDataBase();
-        dataBase.addUser("dda", "dada", "dada");
-        dataBase.deleteUser("dda");
+        dataBase.deleteUser("admin");
+//        dataBase.addUser("admin", "admin", "admin");
     }
 }

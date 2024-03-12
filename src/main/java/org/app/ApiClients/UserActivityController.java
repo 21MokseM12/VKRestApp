@@ -1,5 +1,7 @@
 package org.app.ApiClients;
 
+import org.app.data_base.DataBase;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -8,11 +10,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 public class UserActivityController {
+    @Autowired
+    private DataBase dataBase;
 
     private final static List<User> users = new ArrayList<>();
 
     @PostMapping("")
     public User addUser(@RequestBody User login) {
+        dataBase.addUser(login.getLogin(), login.getPassword(), login.getToken());
         users.add(login);
         return login;
     }

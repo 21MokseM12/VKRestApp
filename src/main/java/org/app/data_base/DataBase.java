@@ -2,9 +2,6 @@ package org.app.data_base;
 import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
 
-import java.util.Objects;
-
-
 @Component
 public class DataBase {
     private static DataBase dataBase;

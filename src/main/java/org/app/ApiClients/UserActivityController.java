@@ -1,5 +1,6 @@
 package org.app.ApiClients;
 
+import org.app.data_base.Clients;
 import org.app.data_base.DataBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +24,8 @@ public class UserActivityController {
     }
 
     @GetMapping("")
-    public List<User> getUsers() {
-        return users;
+    public List<Clients> getUsers() {
+        return DataBase.getDataBase().getAllUserData();
     }
 
     @GetMapping("/{login}")

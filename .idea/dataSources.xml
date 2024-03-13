@@ -1,20 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="restApiDataBase@localhost" uuid="6fc5e49c-5025-41f1-91d0-16e4b782353b">
+    <data-source source="LOCAL" name="restApiDataBase@localhost" uuid="16f54670-401b-4e24-ad38-9f218745e201">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/restApiDataBase</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="DataBaseUnit/Hibernate" uuid="c7d3bb6a-095c-46c9-9ca2-0754d927dd53">
-      <driver-ref>postgresql</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>Hibernate
-
-C:/Users/Lenovo/IdeaProjects/VKRestApp/src/main/resources/META-INF/persistence.xml</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/restApiDataBase</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>

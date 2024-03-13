@@ -22,8 +22,8 @@ import java.util.Objects;
 )
 @Entity
 public class Clients {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int id;
     @Basic
@@ -36,7 +36,7 @@ public class Clients {
     @Column(name = "password", nullable = false, length = 254)
     private String password;
 
-    public Clients(int id, String role, String login, String password, String token) {
+    public Clients(int id, String role, String login, String password) {
         this.id = id;
         this.role = role;
         this.login = login;

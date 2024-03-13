@@ -13,7 +13,7 @@ public class UserActivityController {
     @Autowired
     private DataBase dataBase;
 
-    @PostMapping("/registration")
+        @PostMapping("/registration")
     public User addUser(@RequestBody User login) {
         dataBase.addUser(login.getLogin(), login.getToken());
         return login;

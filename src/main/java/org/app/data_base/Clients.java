@@ -43,7 +43,7 @@ public class Clients {
         this.password = password;
     }
     public Clients() {}
-    public Clients(String role, String login, String password, String token) {
+    public Clients(String role, String login, String password) {
         this.role = role;
         this.login = login;
         this.password = password;

@@ -4,6 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.app.data_base.entities.Clients;
 import org.app.data_base.DataBase;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,11 +25,11 @@ public class UserActivityController {
     @Autowired
     private RestTemplate restTemplate;
 
-//    @PostMapping("/registration")
-//    public User addUser(@RequestBody User login) {
-//        dataBase.addUser(login.getLogin(), login.getToken());
-//        return login;
-//    }
+    @PostMapping("/registration")
+    public User addUser(@RequestBody User login) {
+        dataBase.addUser(new Clients("ROLE_POSTS", login.getLogin(), login.getPassword()));
+        return login;
+    }
 
 //    @GetMapping("/allClients")
 //    public List<Clients> getUsers() {
@@ -48,16 +49,26 @@ public class UserActivityController {
         return response;
     }
 
-    @GetMapping("/posts/{url}")
-    public ResponseEntity<String> proxyRequest2(@PathVariable String[] url) {
-        String targetUrl = "https://jsonplaceholder.typicode.com/posts/";
-        for (String segment : url) {
-            targetUrl += segment + "/";
+    @GetMapping("/posts/{url}**")
+    @PreAuthorize("hasAuthority('ROLE_POSTS')")
+    public ResponseEntity<String> proxyRequest2(@PathVariable String url) {
+        try {
+            String targetUrl = "https://jsonplaceholder.typicode.com/posts/" + url;
+            System.out.println(targetUrl);
+            ResponseEntity<String> response = restTemplate.getForEntity(targetUrl, String.class);
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        System.out.println(targetUrl);
-        ResponseEntity<String> response = restTemplate.getForEntity(targetUrl, String.class);
-        return response;
+        return null;
     }
+//    @GetMapping("/example/**")
+//    public String handleRequest(HttpServletRequest request) {
+//        String remainingPath = (String) request.getAttribute(
+//                RequestDispatcher.FORWARD_REQUEST_URI);
+//        // обработка remainingPath
+//        return "Remaining part of the URL: " + remainingPath;
+//    }
 
     @GetMapping("/albums/{url}")
     public ResponseEntity<String> proxyRequest3(@PathVariable("url") String url) {
@@ -80,10 +91,10 @@ public class UserActivityController {
 //        return post;
 //    }
 
-//    @DeleteMapping("/{login}")
-//    public String deleteUser(@PathVariable("login") String login) {
-//        dataBase.deleteUser(login);
-//        return "User with username: " + login + " has been deleted";
-//    }
+    @DeleteMapping("/{login}")
+    public String deleteUser(@PathVariable("login") String login) {
+        dataBase.deleteUser(login);
+        return "User with username: " + login + " has been deleted";
+    }
 
 }

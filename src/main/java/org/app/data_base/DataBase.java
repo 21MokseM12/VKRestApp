@@ -8,12 +8,12 @@ import java.util.List;
 @Component
 @Scope("singleton")
 public class DataBase {
-    public void addUser(String login, String password, String token) {
+    public void addUser(String login, String password) {
         if (!isUserExist(login)) {
             try (EntityManagerFactory factory = Persistence.createEntityManagerFactory("DataBaseUnit")) {
                 EntityManager manager = factory.createEntityManager();
                 manager.getTransaction().begin();
-                Clients client = new Clients("user", login, password, token);
+                Clients client = new Clients("user", login, password);
                 client = manager.merge(client);
                 manager.getTransaction().commit();
             }

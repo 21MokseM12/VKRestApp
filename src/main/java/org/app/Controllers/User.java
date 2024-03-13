@@ -1,6 +1,8 @@
 package org.app.Controllers;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class User {
     private String login;
     private String password;
@@ -29,8 +31,8 @@ public class User {
     }
 
     public String getToken() {
-        String token = TokenGenerator.generateToken(login, password);
-        return token;
+        TokenGenerator generator = new TokenGenerator();
+        return generator.encode(login + ":" + password);
     }
 
     public String getRole() {

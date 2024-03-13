@@ -27,10 +27,10 @@ public class Clients {
     @Column(name = "id", nullable = false)
     private int id;
     @Basic
-    @Column(name = "role", nullable = false, length = 20)
+    @Column(name = "role", nullable = false, length = 200)
     private String role;
     @Basic
-    @Column(name = "login", nullable = false, length = 200)
+    @Column(name = "login", nullable = false, length = 200, unique = true)
     private String login;
     @Basic
     @Column(name = "password", nullable = false, length = 254)

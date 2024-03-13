@@ -26,18 +26,12 @@ public class UserActivityController {
         dataBase.addUser(new Clients(login.getRole(), login.getLogin(), login.getPassword()));
         return login;
     }
+    @GetMapping("/welcome")
+    public String welcome() {
+        return "<h2>Please, register you account at \"/api/registration\"!</h2>";
+    }
 
-//    @GetMapping("/allClients")
-//    public List<Clients> getUsers() {
-//        return dataBase.getAllUserData();
-//    }
-//
-//    @GetMapping("/client/{login}")
-//    public String getUserByUsername(@PathVariable("login") String login) {
-//        return dataBase.getUserData(login);
-//    }
-//
-
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/{url}")
     public ResponseEntity<String> proxyRequest0(@PathVariable("url") String url) {
         String targetUrl = "https://jsonplaceholder.typicode.com/" + url;
@@ -45,6 +39,7 @@ public class UserActivityController {
         return response;
     }
 
+    @PreAuthorize("hasAuthority('ROLE_POSTS') || hasAuthority('ROLE_ADMIN')")
     @GetMapping("/posts/{url}")
     public ResponseEntity<String> proxyRequest1(@PathVariable("url") String url) {
         String targetUrl = "https://jsonplaceholder.typicode.com/posts/" + url;
@@ -52,14 +47,15 @@ public class UserActivityController {
         return response;
     }
 
+    @PreAuthorize("hasAuthority('ROLE_POSTS') || hasAuthority('ROLE_ADMIN')")
     @GetMapping("/posts/{url}/{url1}")
     public ResponseEntity<String> proxyRequest2(@PathVariable("url") String url, @PathVariable("url1") String url1) {
             String targetUrl = "https://jsonplaceholder.typicode.com/posts/" + url + "/" + url1;
-            System.out.println(targetUrl);
             ResponseEntity<String> response = restTemplate.getForEntity(targetUrl, String.class);
             return response;
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ALBUMS') || hasAuthority('ROLE_ADMIN')")
     @GetMapping("/albums/{url}")
     public ResponseEntity<String> proxyRequest3(@PathVariable("url") String url) {
         String targetUrl = "https://jsonplaceholder.typicode.com/albums/" + url;
@@ -67,6 +63,7 @@ public class UserActivityController {
         return response;
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ALBUMS') || hasAuthority('ROLE_ADMIN')")
     @GetMapping("/albums/{url}/{url1}")
     public ResponseEntity<String> proxyRequest4(@PathVariable("url") String url, @PathVariable("url1") String url1) {
         String targetUrl = "https://jsonplaceholder.typicode.com/albums/" + url + "/" + url1;
@@ -74,6 +71,7 @@ public class UserActivityController {
         return response;
     }
 
+    @PreAuthorize("hasAuthority('ROLE_USERS') || hasAuthority('ROLE_ADMIN')")
     @GetMapping("/users/{url}")
     public ResponseEntity<String> proxyRequest5 (@PathVariable("url") String url) {
         String targetUrl = "https://jsonplaceholder.typicode.com/users/" + url;
@@ -81,6 +79,7 @@ public class UserActivityController {
         return response;
     }
 
+    @PreAuthorize("hasAuthority('ROLE_USERS') || hasAuthority('ROLE_ADMIN')")
     @GetMapping("/users/{url}/{url1}")
     public ResponseEntity<String> proxyRequest6 (@PathVariable("url") String url, @PathVariable("url1") String url1) {
         String targetUrl = "https://jsonplaceholder.typicode.com/users/" + url + "/" + url1;
@@ -95,6 +94,7 @@ public class UserActivityController {
 //        return post;
 //    }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @DeleteMapping("/{login}")
     public String deleteUser(@PathVariable("login") String login) {
         dataBase.deleteUser(login);

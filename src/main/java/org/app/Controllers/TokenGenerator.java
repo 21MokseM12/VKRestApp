@@ -8,7 +8,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
-@Component
+//@Component
 public class TokenGenerator implements PasswordEncoder {
     @Override
     public String encode(CharSequence rawPassword) {

@@ -22,46 +22,28 @@ import java.util.Objects;
 )
 @Entity
 public class Clients {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "id", nullable = false)
-    private int id;
     @Basic
     @Column(name = "role", nullable = false, length = 20)
     private String role;
     @Basic
+    @Id
     @Column(name = "login", nullable = false, length = 200)
     private String login;
     @Basic
     @Column(name = "password", nullable = false, length = 254)
     private String password;
-    @Basic
-    @Column(name = "token", nullable = false, length = 20)
-    private String token;
 
-    public Clients(int id, String role, String login, String password, String token) {
-        this.id = id;
+    public Clients(String role, String login, String password) {
         this.role = role;
         this.login = login;
         this.password = password;
-        this.token = token;
     }
     public Clients() {}
     public Clients(String role, String login, String password, String token) {
         this.role = role;
         this.login = login;
         this.password = password;
-        this.token = token;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getRole() {
         return role;
     }
@@ -86,28 +68,20 @@ public class Clients {
         this.password = password;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Clients clients = (Clients) o;
-        return id == clients.id && Objects.equals(role, clients.role) && Objects.equals(login, clients.login) && Objects.equals(password, clients.password) && Objects.equals(token, clients.token);
+        return Objects.equals(role, clients.role) && Objects.equals(login, clients.login) && Objects.equals(password, clients.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, role, login, password, token);
+        return Objects.hash(role, login, password);
     }
 
     @Override
-    public String toString() {return "Clients [ id: " + this.id + ", role: " + this.role + ", login: " + this.login +
-            ", password: " + this.password + ", token: " + this.token + "]";}
+    public String toString() {return "Clients [role: " + this.role + ", login: " + this.login +
+            ", password: " + this.password + "]";}
 }

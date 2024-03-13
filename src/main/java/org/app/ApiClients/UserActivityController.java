@@ -18,7 +18,7 @@ public class UserActivityController {
 
     @PostMapping("")
     public User addUser(@RequestBody User login) {
-        dataBase.addUser(login.getLogin(), login.getPassword(), login.getToken());
+        dataBase.addUser(login.getLogin(), login.getToken());
         users.add(login);
         return login;
     }

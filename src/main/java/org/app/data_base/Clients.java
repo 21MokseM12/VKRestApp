@@ -35,23 +35,18 @@ public class Clients {
     @Basic
     @Column(name = "password", nullable = false, length = 254)
     private String password;
-    @Basic
-    @Column(name = "token", nullable = false, length = 20)
-    private String token;
 
     public Clients(int id, String role, String login, String password, String token) {
         this.id = id;
         this.role = role;
         this.login = login;
         this.password = password;
-        this.token = token;
     }
     public Clients() {}
     public Clients(String role, String login, String password, String token) {
         this.role = role;
         this.login = login;
         this.password = password;
-        this.token = token;
     }
 
     public int getId() {
@@ -86,28 +81,28 @@ public class Clients {
         this.password = password;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
+//    public String getToken() {
+//        return token;
+//    }
+//
+//    public void setToken(String token) {
+//        this.token = token;
+//    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Clients clients = (Clients) o;
-        return id == clients.id && Objects.equals(role, clients.role) && Objects.equals(login, clients.login) && Objects.equals(password, clients.password) && Objects.equals(token, clients.token);
+        return id == clients.id && Objects.equals(role, clients.role) && Objects.equals(login, clients.login) && Objects.equals(password, clients.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, role, login, password, token);
+        return Objects.hash(id, role, login, password);
     }
 
     @Override
     public String toString() {return "Clients [ id: " + this.id + ", role: " + this.role + ", login: " + this.login +
-            ", password: " + this.password + ", token: " + this.token + "]";}
+            ", password: " + this.password + "]";}
 }

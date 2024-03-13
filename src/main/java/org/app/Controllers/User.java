@@ -1,9 +1,4 @@
-package org.app.ApiClients;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.app.ApiClients.TokenGenerator.generateToken;
+package org.app.Controllers;
 
 
 public class User {

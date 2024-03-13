@@ -28,7 +28,7 @@ public class UserActivityController {
     }
     @GetMapping("/welcome")
     public String welcome() {
-        return "<h2>Please, register you account at \"/api/registration\"!</h2>";
+        return "<h2>Please, register you account at \"/api/registration\"! in Postman program</h2>";
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")

@@ -27,7 +27,7 @@ public class UserActivityController {
 
     @PostMapping("/registration")
     public User addUser(@RequestBody User login) {
-        dataBase.addUser(new Clients("ROLE_POSTS", login.getLogin(), login.getPassword()));
+        dataBase.addUser(new Clients(login.getRole(), login.getLogin(), login.getPassword()));
         return login;
     }
 
@@ -42,33 +42,27 @@ public class UserActivityController {
 //    }
 //
 
-    @GetMapping("/")
-    public ResponseEntity<String> proxyRequest1(@PathVariable("url") String url) {
+    @GetMapping("/{url}")
+    public ResponseEntity<String> proxyRequest0(@PathVariable("url") String url) {
         String targetUrl = "https://jsonplaceholder.typicode.com/" + url;
         ResponseEntity<String> response = restTemplate.getForEntity(targetUrl, String.class);
         return response;
     }
 
-    @GetMapping("/posts/{url}**")
-    @PreAuthorize("hasAuthority('ROLE_POSTS')")
-    public ResponseEntity<String> proxyRequest2(@PathVariable String url) {
-        try {
-            String targetUrl = "https://jsonplaceholder.typicode.com/posts/" + url;
+    @GetMapping("/posts/{url}")
+    public ResponseEntity<String> proxyRequest1(@PathVariable("url") String url) {
+        String targetUrl = "https://jsonplaceholder.typicode.com/posts/" + url;
+        ResponseEntity<String> response = restTemplate.getForEntity(targetUrl, String.class);
+        return response;
+    }
+
+    @GetMapping("/posts/{url}/{url1}")
+    public ResponseEntity<String> proxyRequest2(@PathVariable("url") String url, @PathVariable("url1") String url1) {
+            String targetUrl = "https://jsonplaceholder.typicode.com/posts/" + url + "/" + url1;
             System.out.println(targetUrl);
             ResponseEntity<String> response = restTemplate.getForEntity(targetUrl, String.class);
             return response;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
-//    @GetMapping("/example/**")
-//    public String handleRequest(HttpServletRequest request) {
-//        String remainingPath = (String) request.getAttribute(
-//                RequestDispatcher.FORWARD_REQUEST_URI);
-//        // обработка remainingPath
-//        return "Remaining part of the URL: " + remainingPath;
-//    }
 
     @GetMapping("/albums/{url}")
     public ResponseEntity<String> proxyRequest3(@PathVariable("url") String url) {
@@ -77,9 +71,23 @@ public class UserActivityController {
         return response;
     }
 
+    @GetMapping("/albums/{url}/{url1}")
+    public ResponseEntity<String> proxyRequest4(@PathVariable("url") String url, @PathVariable("url1") String url1) {
+        String targetUrl = "https://jsonplaceholder.typicode.com/albums/" + url + "/" + url1;
+        ResponseEntity<String> response = restTemplate.getForEntity(targetUrl, String.class);
+        return response;
+    }
+
     @GetMapping("/users/{url}")
-    public ResponseEntity<String> proxyRequest4(@PathVariable("url") String url) {
+    public ResponseEntity<String> proxyRequest5 (@PathVariable("url") String url) {
         String targetUrl = "https://jsonplaceholder.typicode.com/users/" + url;
+        ResponseEntity<String> response = restTemplate.getForEntity(targetUrl, String.class);
+        return response;
+    }
+
+    @GetMapping("/users/{url}/{url1}")
+    public ResponseEntity<String> proxyRequest6 (@PathVariable("url") String url, @PathVariable("url1") String url1) {
+        String targetUrl = "https://jsonplaceholder.typicode.com/users/" + url + "/" + url1;
         ResponseEntity<String> response = restTemplate.getForEntity(targetUrl, String.class);
         return response;
     }

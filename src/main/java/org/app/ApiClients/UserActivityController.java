@@ -5,7 +5,6 @@ import org.app.data_base.DataBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -14,12 +13,9 @@ public class UserActivityController {
     @Autowired
     private DataBase dataBase;
 
-    private final static List<User> users = new ArrayList<>();
-
-    @PostMapping("")
+    @PostMapping("/registration")
     public User addUser(@RequestBody User login) {
-        dataBase.addUser(login.getLogin(), login.getToken());
-        users.add(login);
+        dataBase.addUser(login.getLogin(),login.getToken());
         return login;
     }
 
@@ -29,8 +25,8 @@ public class UserActivityController {
     }
 
     @GetMapping("/{login}")
-    public User getUserByUsername(@PathVariable("login") String login) {
-        return users.stream().filter(user -> user.getLogin().equals(login)).findFirst().get();
+    public String getUserByUsername(@PathVariable("login") String login) {
+        return dataBase.getUserData(login);
     }
 
 //    @PutMapping("/{username}")
@@ -39,10 +35,10 @@ public class UserActivityController {
 //        return post;
 //    }
 
-    @DeleteMapping("/{username}")
-    public String deleteUser(@PathVariable("username") String username) {
-        users.stream().filter(user -> user.getLogin().equals(username)).findAny().ifPresent(users::remove);
-        return "User with username: " + username + " has been deleted";
+    @DeleteMapping("/{login}")
+    public String deleteUser(@PathVariable("login") String login) {
+        dataBase.deleteUser(login);
+        return "User with username: " + login + " has been deleted";
     }
 
 }
